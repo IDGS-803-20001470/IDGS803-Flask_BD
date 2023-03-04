@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div style="padding-top: 20px;" class="col-6">
+            {% from "_macros.html" import render_field %}
+            <form name="form" action="" method="POST" novalidate>
+                <!-- novalidate es para que no valide el formulario por defecto -->
+                {{form.csrf_token}}
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                <div style="padding-bottom: 15px;">
+                    {{ render_field(form.username) }} <!-- Es para que pinte  -->
+                </div>
+                <div style="padding-bottom: 15px;">
+                    {{ render_field(form.password) }}
+                </div>
+             
+                <div style="padding-top: 15px;">
+                    <button type="submit" class="btn btn-primary " value="registrar"> Enviar
+                        <i class="icon-ok icon-white"></i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

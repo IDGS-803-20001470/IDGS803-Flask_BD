@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div style="padding-top: 20px;" class="col-5">
+            {% from "_macros.html" import render_field %}
+            <div class="card">
+                <div class="card-header">
+                    Agregar Palabras
+                </div>
+                <div class="card-body">
+                    <form name="form" action="/traductor" method="POST" novalidate>
+                        <!-- novalidate es para que no valide el formulario por defecto -->
+                        {{form.csrf_token}}
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+                        <div style="padding-bottom: 15px;">
+                            {{ render_field(form.Esp) }} <!-- Es para que pinte  -->
+                        </div>
+                        <div style="padding-bottom: 15px;">
+                            {{ render_field(form.Ing) }}
+                        </div>
+
+                        <div style="padding-top: 15px;">
+                            <button type="submit" class="btn btn-primary" name="btnGuardar" value="1"> Guardar
+                                <i class="icon-ok icon-white"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div style="padding-top: 20px;" class="col-5">
+            {% from "_macros.html" import render_field %}
+            <div class="card">
+                <div class="card-header">
+                    Resultado
+                </div>
+                <div class="card-body">
+                    <div style="padding-bottom: 15px;">
+                        <label for="txtRes">Resultado</label>
+                        {% if res!="" %}
+                        <input id="txtRes" value="{{res}}"></input>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-header">
+                        Seleccionar Opción
+                    </div>
+                    <div class="card-body">
+                        <form name="form2" action="/eleccionTraductor" method="POST" novalidate>
+                            <!-- novalidate es para que no valide el formulario por defecto -->
+                            {{form2.csrf_token}}
+                            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                            <div style="padding-bottom: 15px;">
+                                {{ render_field(form2.palabra) }} <!-- Es para que pinte  -->
+                            </div>
+                            <label class="control-label" for="txtEsp">Español</label>&nbsp; &nbsp;
+                            <input type="radio" id="btnEspañol" name="opcion" value="1"></input> &nbsp; &nbsp;
+
+                            <label class="control-label" for="txtIng">Ingles</label>&nbsp; &nbsp;
+                            <input type="radio" id="btnIngles" name="opcion" value="2"></input>
+
+                            <div style="padding-top: 15px;">
+                                <button type="submit" class="btn btn-primary" name="btnGuardar" value="2"> Traducir
+                                    <i class="icon-ok icon-white"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {% endblock %}
